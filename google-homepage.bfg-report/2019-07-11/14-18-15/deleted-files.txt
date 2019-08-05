@@ -1,0 +1,1 @@
+d32b69f11d4a9775c6d14188765c0f91f22640bc 59249314 google-chrome-stable_current_amd64.deb
