@@ -1,0 +1,24 @@
+
+.calc-buttons button {
+    background-color: bisque;
+    border-radius: 30%;
+}
+.functions button{
+    background-color: lightblue;
+    border-radius: 30%;
+}
+
+button {
+    width: 36px;
+    height: 36px;
+}
+
+.calc-container{
+    border: 10px;
+    border-color: rgb(0, 0, 0);
+    background-color: azure;
+    font-family: 'Courier New', Courier, monospace;
+}
+body {
+    text-align: center;
+}
