@@ -3,101 +3,91 @@ const numberKeys = document.querySelectorAll(".number-key")
 const functKeys = document.querySelectorAll(".function-key")
 const screen = document.querySelector("body > div > div.display > p")
 const compute = document.querySelector(".compute-key")
+const clear = document.querySelector(".clear-key")
 const runningTotal = document.querySelector("body > div > div.display > p.running-total")
-var currentNum= undefined
-var storedNum = undefined
+var newVal= undefined
+var prevVal = undefined
 var operatorType = undefined
-var calculatedNum = undefined
+var resultVal = undefined
+var decimalClicked = false
 
-
-var arrObjFiltered = (num) => {
-    return{
-    value: num
-}}
-calculate = [];
-filteredCalc = [];
-runTheMath = () => {
-    currentNum = Number(currentNum)
-    storedNum = Number(storedNum)
-    console.log(`Performing ${operatorType} function`);
-switch (operatorType) {
-    case "+":
-        console.log('+ is registered');
-        //When + is pushed twice in a row it needs to auto add
-        //if there is a stored number.. storednum + current num = calculatednum 
-        //calculated number is the running calculation, not just storage...
-        //1st push sets original saved number
-        if (storedNum == null){currentNum = storedNum}
-        //2nd push w/o equals adds current and stored number
-        else if (storedNum !== null && calculatedNum == null){
-        calculatedNum = currentNum + storedNum }
-        //3rd push w/o equals adds current and adds to calculated
-        else {calculatedNum = currentNum + calculatedNum}
-        
-        //return
-        screen.innerHTML == ''
-        return runningTotal.innerHTML = calculatedNum
-    break;
-    case "-":
-        console.log('- is registered');
-        calculatedNum = currentNum - storedNum
-        storedNum = calculatedNum
-        currentNum = calculatedNum
-        return screen.innerHTML = calculatedNum
-    break;
-    case "/":
-        console.log('/ is registered');
-        calculatedNum =  storedNum / currentNum
-        storedNum = calculatedNum
-        currentNum = calculatedNum
-        return screen.innerHTML = calculatedNum
-    break;
-    case "*":
-        console.log('* is registered');
-        calculatedNum = currentNum * storedNum
-        storedNum = calculatedNum
-        currentNum = calculatedNum
-        return screen.innerHTML = calculatedNum
-        
-    break;
-    case "clear":
-        console.log('clear is registered');
-        storedNum = ''
-        calculatedNum = ''
-        currentNum = '0'
-        screen.innerHTML = currentNum
-    break;
-    
-}
-}
+//end var setups
+//start functions
 //Assigns numbered button functionality
 numberKeys.forEach(button => {
    button.addEventListener('click', () => {
-       if (currentNum == undefined) {
-           currentNum = ''
+       if (newVal == undefined) {
+           newVal = ''
            screen.innerHTML = '</br>'
         }
-        currentNum += button.value
-        screen.innerHTML = currentNum
+        if (button.value == '.'){
+            if(decimalClicked != true){
+            newVal += button.value
+            decimalClicked = true
+            screen.innerHTML = newVal} 
+        } else { 
+        newVal += button.value
+        screen.innerHTML = newVal}
         });
 });
 //assgins operator keys functionality
 functKeys.forEach(button => {
     button.addEventListener('click', () => {
-        storedNum = Number(storedNum)
-        currentNum = Number(currentNum)
-        if (storedNum >= 0 && currentNum >= 0) {runTheMath()}
-        storedNum = currentNum
-        currentNum = ''
+        if (!resultVal){
+            prevVal = newVal; 
+        } else {
+           prevVal = resultVal
+        }
+        prevVal = parseFloat(prevVal)
+        newVal = parseFloat(newVal)
         operatorType = button.value
+        newVal = undefined
         screen.innerHTML = '</br>'
         
+        decimalClicked = false
     })
 })
 compute.addEventListener('click', () => {
-    runTheMath()
-})
+        if(newVal && prevVal){
+        prevVal = parseFloat(prevVal)
+        newVal = parseFloat(newVal)
+        screen.innerHTML = '</br>'
+        decimalClicked = false
+        if(newVal == 0 && operatorType == '/'){
+            screen.innerHTML = 'Lol no son, go push clear'
+            } else {
+        switch (operatorType) {
+            case "+":
+            resultVal = prevVal + newVal
+            break;
+            case "-":
+            resultVal = prevVal + newVal
+            break;
+            case "/":
+            resultVal = prevVal / newVal
+            break;
+            case "*":
+            resultVal = prevVal * newVal
+            break;
+            default:
+            resultVal = resultVal
+            break;
+        }
 
+        operatorType = undefined
+        prevVal = newVal
+        newVal = ''
+        screen.innerHTML = Number(resultVal.toFixed(3))
+    }}  
+}   )
+clear.addEventListener('click', () => {
+    newVal= undefined
+    prevVal = undefined
+    operatorType = undefined
+    resultVal = undefined
+    decimalClicked = false
+    screen.innerHTML = 'Push to buttons to calculate'
+})
 
 //Todos
 //take the new '+' that works and convert it to the other operations

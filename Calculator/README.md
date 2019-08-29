@@ -23,13 +23,25 @@ This is the hardest part of the project. You need to figure out how to store all
 //Gotchas: watch out for and fix these bugs if they show up in your code:
 Users should be able to string together several operations and get the right answer: 12 + 7 - 5 * 3 etc.
 
-8] You should round answers with long decimals so that they don’t overflow the screen.
-9] Pressing = before entering all of the numbers or an operator could cause problems!
-10] Pressing “clear” should wipe out any existing data.. make sure the user is really starting fresh after pressing “clear”
+done 8] You should round answers with long decimals so that they don’t overflow the screen.
+done 9] Pressing = before entering all of the numbers or an operator could cause problems!
+done 10] Pressing “clear” should wipe out any existing data.. make sure the user is really starting fresh after pressing “clear”
 
-11] Display a snarky error message if the user tries to divide by 0… don’t let it crash your calculator!
+done 11] Display a snarky error message if the user tries to divide by 0… don’t let it crash your calculator!
 
-EXTRA CREDIT: Users can get floating point numbers if they do the math required to get one, but they can’t type them in yet. Add a . button and let users input decimals! Make sure you don’t let them type more than one though: 12.3.56.5. It is hard to do math on these numbers. (disable the decimal button if there’s already one in the display)
+Done! EXTRA CREDIT: Users can get floating point numbers if they do the math required to get one, but they can’t type them in yet. Add a . button and let users input decimals! Make sure you don’t let them type more than one though: 12.3.56.5. It is hard to do math on these numbers. (disable the decimal button if there’s already one in the display)
+
 EXTRA CREDIT: Make it look nice! This can be a good portfolio project… but not if it’s UGLY. At least make the operations a different color from the keypad buttons.
 EXTRA CREDIT: Add a “backspace” button, so the user can undo if they click the wrong number.
 EXTRA CREDIT: Add keyboard support!
+
+
+if (storedNum == null){currentNum = storedNum}
+  else if (storedNum !== null && calculatedNum == null){
+        calculatedNum = currentNum + storedNum }
+         else {calculatedNum = currentNum + calculatedNum}
+          screen.innerHTML == ''
+        operatorType = undefined;
+        return runningTotal.innerHTML = calculatedNum
+
+Problem, if switch operator after the second one, then it doesn't calculate correctly, first push '/' then '+', it only adds.
