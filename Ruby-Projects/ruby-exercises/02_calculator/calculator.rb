@@ -23,3 +23,17 @@ def power x, y
     power  = x ** y
     power
 end
+def factorial number
+number = number.to_i
+numberArray = Array.new
+if number == 0 || number == 1 then 
+    factor = 1
+else
+    number.times do
+    numberArray.push(number)
+    number=number-1
+end
+factor = numberArray.reduce(:*)
+    factor
+end
+end
