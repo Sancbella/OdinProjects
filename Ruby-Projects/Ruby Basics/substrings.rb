@@ -16,11 +16,13 @@ def substrings (input,source)
     input = input.split(' ')
     source.each do |word|
         indexNum = source.index(word)
+        word = word.downcase
         source[indexNum]= word.gsub(/\W/, '')
         counter = {word => 0}
     end
     input.each do |word|
         indexNum = input.index(word)
+        word = word.downcase
         input[indexNum] = word.gsub(/\W/, '')
     end
     source = source.uniq
@@ -28,7 +30,7 @@ def substrings (input,source)
         input.each do |inputWord| 
             if inputWord == sourceWord then
                 value = counter[sourceWord].to_i + 1
-                counter[sourceWord] = value 
+                counter.store(sourceWord, value)
             end
         end
     end
