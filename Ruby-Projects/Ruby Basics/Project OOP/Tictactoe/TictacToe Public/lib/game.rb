@@ -4,6 +4,9 @@ class Game
     def initialize
         @win_combos = [[0,3,6],[1,4,7],[2,5,8],[2,4,6],[0,1,2],[3,4,5],[6,7,8],[0,4,8]]
         @current_player = nil
+        @@current_round = Board.new
+        @player1 = Player.new('Silvia', 'X')
+        @player2 = Player.new('Chris', 'O')
     end
     def play
         def self.intro
@@ -17,8 +20,8 @@ class Game
         end
         self.intro
         @@current_round = Board.new
-        @player1 = Player.new(@p1name, 'X')
-        @player2 = Player.new(@p2name, 'O')
+        @player1.name = @p1name
+        @player2.name = @p2name
         @current_player = @player1
             while won? == false && tie? == false
                 run_turn
@@ -47,9 +50,9 @@ class Game
             @current_player = @player1
         end
     end
-    def won?
-        move_combos1 = @player1.moves.combination(3).to_a
-        move_combos2 = @player2.moves.combination(3).to_a
+    def won?(p1moves = @player1.moves, p2moves = @player2.moves)
+        move_combos1 = p1moves.combination(3).to_a
+        move_combos2 = p2moves.combination(3).to_a
         @win_combos.each do |i|
             ## compare each win # in each sub-array with the players array
 
