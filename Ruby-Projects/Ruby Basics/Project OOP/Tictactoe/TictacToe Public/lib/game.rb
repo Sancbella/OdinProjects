@@ -32,16 +32,16 @@ class Game
         
         @@current_round.display
         loop do 
-        puts "Alright! #{@current_player.name}, you're up!"
-        puts "Please give me a number 1 thru 9 -- You're #{@current_player.symbol}"
-        choice = gets.chomp.to_i
-        next unless choice.between?(1,9) && occupied?(choice)
-        "Let it be so!"
-        @current_player.moves.push(choice-1)
-        #literally, accesses the array, takes the last number added to the current player array, substracts 1 from it and uses it as a boards index
-        # from there it sets that element as the current player's symbol 
-        @@current_round.board[@current_player.moves[-1]] = @current_player.symbol
-        break
+            puts "Alright! #{@current_player.name}, you're up!"
+            puts "Please give me a number 1 thru 9 -- You're #{@current_player.symbol}"
+            choice = gets.chomp.to_i
+            next unless choice.between?(1,9) && occupied?(choice)
+            "Let it be so!"
+            @current_player.moves.push(choice-1)
+            #literally, accesses the array, takes the last number added to the current player array, substracts 1 from it and uses it as a boards index
+            # from there it sets that element as the current player's symbol 
+            @@current_round.board[@current_player.moves[-1]] = @current_player.symbol
+            break
         end
         case @current_player
         when @player1
