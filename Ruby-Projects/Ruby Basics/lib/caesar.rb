@@ -1,3 +1,5 @@
+class Caesar
+    
 $letter_To_Numbers = {
     "a" => 1,
     "b" => 2,
@@ -58,7 +60,9 @@ $finalWord = Array.new
 def cipher(word, count) 
     word.each_char.map{|letter| encrypt(letter, count)}  
     $finalWord = $finalWord.join('')
-    puts $finalWord
+    output = $finalWord
+    $finalWord = Array.new
+    return output
 end
 def encrypt(letter, count)
     u = nil
@@ -79,6 +83,8 @@ def encrypt(letter, count)
         $finalWord.push(letter)
     end
 end
+end
 
-
-cipher("There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",5)
+cypher = Caesar.new
+cypher.cipher('Hells yea', 5)
+cypher.cipher('Hello', 5)
